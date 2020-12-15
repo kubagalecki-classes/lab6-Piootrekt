@@ -9,8 +9,11 @@
 std::vector< char > foo(std::list< Human >& people)
 {
     std::vector< char > ret_v(people.size());
+    auto                uro = [](Human& ludz) { ludz.birthday(); };
+    for_each(people.begin(), people.end(), uro);
 
-    // Twoja implementacja tutaj
-
+    transform(people.rbegin(), people.rend(), ret_v.begin(), [](Human& ludz) {
+        return (ludz.isMonster() ? 'n' : 'y');
+    });
     return ret_v;
 }
